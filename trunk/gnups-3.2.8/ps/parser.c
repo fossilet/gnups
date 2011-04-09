@@ -501,247 +501,6 @@ static const char *parse_sysv_option(void){
   return NULL;
 }
 
-/************************* parse BSD options **********************/
-static const char *parse_bsd_option(void){
-  const char *arg;
-  const char *err;
-
-  flagptr = ps_argv[thisarg];  /* assume we _have_ a '-' */
-  if(flagptr[0]=='-'){
-    if(!force_bsd) return "Can't happen!  Problem #1.";
-  }else{
-    flagptr--; /* off beginning, will increment before use */
-    if(personality & PER_FORCE_BSD){
-      if(!force_bsd) return "Can't happen!  Problem #2.";
-    }else{
-      if(force_bsd) return "2nd chance parse failed, not BSD or SysV.";
-    }
-  }
-
-  while(*++flagptr){
-    switch(*flagptr){
-    case '0' ... '9': /* end */
-      trace("0..9  Old BSD-style select by process ID\n");
-      arg=flagptr;
-      err=parse_list(arg, parse_pid);
-      if(err) return err;
-      selection_list->typecode = SEL_PID;
-      return NULL; /* can't have any more options */
-#if 0
-    case 'A':
-      /* maybe this just does a larger malloc() ? */
-      trace("A Increases the argument space (Digital Unix)\n");
-      return "Option A is reserved.";
-      break;
-    case 'C':
-      /* should divide result by 1-(e**(foo*log(bar))) */
-      trace("C Use raw CPU time for %%CPU instead of decaying ave\n");
-      return "Option C is reserved.";
-      break;
-#endif
-    case 'H':    // The FreeBSD way (NetBSD:s OpenBSD:k FreeBSD:H  -- NIH???)
-      trace("H Print LWP (thread) info.\n");   // was: Use /vmcore as c-dumpfile\n");
-      thread_flags |= TF_B_H;
-      //format_modifiers |= FM_L;    // FIXME: determine if we need something like this
-      break;
-    case 'L': /* single */
-      trace("L List all format specifiers\n");
-      exclusive("L");
-      print_format_specifiers();
-      exit(0);
-    case 'M':   // undocumented for now: these are proliferating!
-      trace("M MacOS X thread display, like AIX/Tru64\n");
-      thread_flags |= TF_B_m;
-      break;
-    case 'N': /* end */
-      trace("N Specify namelist file\n");
-      arg=get_opt_arg();
-      if(!arg) return "Alternate System.map file must follow N.";
-      namelist_file = arg;
-      return NULL; /* can't have any more options */
-    case 'O': /* end */
-      trace("O Like o + defaults, add new columns after PID. Also sort.\n");
-      arg=get_opt_arg();
-      if(!arg) return "Format or sort specification must follow O.";
-      defer_sf_option(arg, SF_B_O);
-      return NULL; /* can't have any more options */
-      break;
-    case 'S':
-      trace("S include dead kids in sum\n");
-      include_dead_children = 1;
-      break;
-    case 'T':
-      trace("T Select all processes on this terminal\n");
-      /* put our tty on a tiny list */
-      {
-        selection_node *node;
-        node = malloc(sizeof(selection_node));
-        node->u = malloc(sizeof(sel_union));
-        node->u[0].tty = cached_tty;
-        node->typecode = SEL_TTY;
-        node->n = 1;
-        node->next = selection_list;
-        selection_list = node;
-      }
-      break;
-    case 'U': /* end */
-      trace("U Select processes for specified users.\n");
-      arg=get_opt_arg();
-      if(!arg) return "List of users must follow U.";
-      err=parse_list(arg, parse_uid);
-      if(err) return err;
-      selection_list->typecode = SEL_EUID;
-      return NULL; /* can't have any more options */
-    case 'V': /* single */
-      trace("V show version info\n");
-      exclusive("V");
-      display_version();
-      exit(0);
-    case 'W':
-      trace("W N/A get swap info from ... not /dev/drum.\n");
-      return "Obsolete W option not supported. (You have a /dev/drum?)";
-      break;
-    case 'X':
-      trace("X Old Linux i386 register format\n");
-      format_flags |= FF_LX;
-      break;
-    case 'Z':  /* FreeBSD does MAC like SGI's Irix does it */
-      trace("Z Print security label for Mandatory Access Control.\n");
-      format_modifiers |= FM_M;
-      break;
-    case 'a':
-      trace("a Select all w/tty, including other users\n");
-      simple_select |= SS_B_a;
-      break;
-    case 'c':
-      trace("c true command name\n");
-      bsd_c_option = 1;
-      break;
-    case 'e':
-      trace("e environment\n");
-      bsd_e_option = 1;
-      break;
-    case 'f':
-      trace("f ASCII art forest\n");
-      forest_type = 'b';
-      break;
-    case 'g':
-      trace("g _all_, even group leaders!.\n");
-      simple_select |= SS_B_g;
-      break;
-    case 'h':
-      trace("h Repeat header... yow.\n");
-      if(header_type) return "Only one heading option may be specified.";
-      if(personality & PER_BSD_h) header_type = HEAD_MULTI;
-      else                        header_type = HEAD_NONE;
-      break;
-    case 'j':
-      trace("j job control format\n");
-      format_flags |= FF_Bj;
-      break;
-    case 'k':
-      // OpenBSD: don't hide "kernel threads" -- like the swapper?
-      // trace("k Print LWP (thread) info.\n");   // was: Use /vmcore as c-dumpfile\n");
-
-      // NetBSD, and soon (?) FreeBSD: sort-by-keyword
-      trace("k Specify sorting keywords.\n");
-      arg=get_opt_arg();
-      if(!arg) return "Long sort specification must follow 'k'.";
-      defer_sf_option(arg, SF_G_sort);
-      return NULL; /* can't have any more options */
-    case 'l':
-      trace("l Display long format\n");
-      format_flags |= FF_Bl;
-      break;
-    case 'm':
-      trace("m all threads, sort on mem use, show mem info\n");
-      if(personality & PER_OLD_m){
-        format_flags |= FF_Lm;
-        break;
-      }
-      if(personality & PER_BSD_m){
-        defer_sf_option("pmem", SF_B_m);
-        break;
-      }
-      thread_flags |= TF_B_m;
-      break;
-    case 'n':
-      trace("n Numeric output for WCHAN, and USER replaced by UID\n");
-      wchan_is_number = 1;
-      user_is_number = 1;
-      /* TODO add tty_is_number too? */
-      break;
-    case 'o': /* end */
-      trace("o Specify user-defined format\n");
-      arg=get_opt_arg();
-      if(!arg) return "Format specification must follow o.";
-      defer_sf_option(arg, SF_B_o);
-      return NULL; /* can't have any more options */
-    case 'p': /* end */
-      trace("p Select by process ID\n");
-      arg=get_opt_arg();
-      if(!arg) return "List of process IDs must follow p.";
-      err=parse_list(arg, parse_pid);
-      if(err) return err;
-      selection_list->typecode = SEL_PID;
-      return NULL; /* can't have any more options */
-    case 'r':
-      trace("r Select running processes\n");
-      running_only = 1;
-      break;
-    case 's':
-      trace("s Display signal format\n");
-      format_flags |= FF_Bs;
-      break;
-    case 't': /* end */
-      trace("t Select by tty.\n");
-      /* List of terminals (tty, pty...) _should_ follow t. */
-      arg=get_opt_arg();
-      if(!arg){
-        /* Wow, obsolete BSD syntax. Put our tty on a tiny list. */
-        selection_node *node;
-        node = malloc(sizeof(selection_node));
-        node->u = malloc(sizeof(sel_union));
-        node->u[0].tty = cached_tty;
-        node->typecode = SEL_TTY;
-        node->n = 1;
-        node->next = selection_list;
-        selection_list = node;
-        return NULL;
-      }
-      err=parse_list(arg, parse_tty);
-      if(err) return err;
-      selection_list->typecode = SEL_TTY;
-      return NULL; /* can't have any more options */
-    case 'u':
-      trace("u Display user-oriented\n");
-      format_flags |= FF_Bu;
-      break;
-    case 'v':
-      trace("v Display virtual memory\n");
-      format_flags |= FF_Bv;
-      break;
-    case 'w':
-      trace("w wide output\n");
-      w_count++;
-      break;
-    case 'x':
-      trace("x Select processes without controlling ttys\n");
-      simple_select |= SS_B_x;
-      break;
-    case '-':
-      return "Embedded '-' among BSD options makes no sense.";
-      break;
-    case '\0':
-      return "Please report the \"BSD \\0 can't happen\" bug.";
-      break;
-    default:
-      return "Unsupported option (BSD syntax)";
-    } /* switch */
-  } /* while */
-  return NULL;
-}
-
 /*************** gnu long options **********************/
 
 /*
@@ -1065,8 +824,8 @@ static void reset_parser(void){
 
 static int arg_type(const char *str){
   int tmp = str[0];
-  if((tmp>='a') && (tmp<='z'))   return ARG_BSD;
-  if((tmp>='A') && (tmp<='Z'))   return ARG_BSD;
+  if((tmp>='a') && (tmp<='z'))   return ARG_FAIL;
+  if((tmp>='A') && (tmp<='Z'))   return ARG_FAIL;
   if((tmp>='0') && (tmp<='9'))   return ARG_PID;
   if(tmp=='+')                   return ARG_SESS;
   if(tmp!='-')                   return ARG_FAIL;
@@ -1096,19 +855,11 @@ static const char *parse_all_options(void){
       err = parse_gnu_option();
       break;
     case ARG_SYSV:
-      if(!force_bsd){   /* else go past case ARG_BSD */
-        err = parse_sysv_option();
-        break;
-    case ARG_BSD:
-        if(force_bsd && !(personality & PER_FORCE_BSD)) return "way bad";
-      }
-      prefer_bsd_defaults = 1;
-      err = parse_bsd_option();
+      err = parse_sysv_option();
       break;
     case ARG_PGRP:
     case ARG_SESS:
     case ARG_PID:
-      prefer_bsd_defaults = 1;
       err = parse_trailing_pids();
       break;
     case ARG_END:
