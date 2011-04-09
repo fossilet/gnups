@@ -1,0 +1,9 @@
+# Why ps sucks?
+
+=Messy options=
+
+This is the first reason and motivation that made me fork ps. It supports Unix options, BSD options and GNU options. But the options are difficult to remember and are prone to errors. 
+
+=Badly documented=
+
+The man page ps(1) documents the ps command. But it omits many of the intricacies under the hood. Just look at the 4th paragraph of Description Section of the man page, it gives you a mess from the start.
