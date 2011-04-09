@@ -1,0 +1,15 @@
+#WTF is BSD options?
+
+= Introduction =
+
+I hate the BSD options.
+
+= Details =
+
+The man page of ps says:
+
+2   BSD options, which may be grouped and must not be used with a dash.
+
+I have been using a FreeBSD machine for years. But I never think of BSD options as options without a dash. Maybe the author refers to very old BSDs. I checked the ps in NetBSD 5.0. It only accept options preceded by a dash, which in what ps calls "Unix options".
+
+WTF?
