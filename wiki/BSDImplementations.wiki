@@ -19,7 +19,7 @@ WTF?
 The BSD options can be safely removed support, and there are Unix and GNU equivalent options.
 
 || BSD option || Equivalent || Function ||
-|| ps a || ps -o pid,tname,stat,bsdtime,command -N -t - ||
+|| `ps a` || ps -o pid,tname,stat,bsdtime,command -N -t - ||
 ||  ||  ||
 ||  ||  ||
 ||  ||  ||
