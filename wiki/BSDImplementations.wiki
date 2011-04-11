@@ -16,23 +16,29 @@ WTF?
 
 = BSD options equivalent =
 
-The BSD options can be safely removed support, and there are Unix and GNU equivalent options.
+The BSD options can be safely removed support, and there are Unix and GNU equivalent options. Only single BSD options are listed. Combinations are not listed, since there is little meaning.
 
-|| BSD option || Equivalent || Function ||
-|| `ps a` || ps -o pid,tname,stat,bsdtime,command -N -t - ||
-||  ||  ||
-||  ||  ||
-||  ||  ||
-||  ||  ||
-||  ||  ||
-||  ||  ||
-||  ||  ||
-||  ||  ||
-||  ||  ||
-||  ||  ||
-||  ||  ||
-||  ||  ||
-||  ||  ||
-||  ||  ||
-||  ||  ||
-||  ||  ||
+|| BSD option || Equivalent || Function || Note ||
+|| `ps a` || `ps -o pid,tname,stat,bsdtime,command -N -t -` || List all processes with a terminal. ||  ||
+|| `ps g` || `/bin/ps -o pid,tname,stat,bsdtime,command -u $EUID -N -t -` || List all processes with a terminal and owned by yourself || Won't work, why? ||
+|| `ps T` || `ps -o pid,tname,stat,bsdtime,command` || Select all processes associated with this terminal. ||  ||
+||  ||  ||  ||  ||
+||  ||  ||  ||  ||
+||  ||  ||  ||  ||
+||  ||  ||  ||  ||
+||  ||  ||  ||  ||
+||  ||  ||  ||  ||
+||  ||  ||  ||  ||
+||  ||  ||  ||  ||
+||  ||  ||  ||  ||
+||  ||  ||  ||  ||
+||  ||  ||  ||  ||
+||  ||  ||  ||  ||
+||  ||  ||  ||  ||
+||  ||  ||  ||  ||
+||  ||  ||  ||  ||
+||  ||  ||  ||  ||
+||  ||  ||  ||  ||
+||  ||  ||  ||  ||
+||  ||  ||  ||  ||
+||  ||  ||  ||  ||
