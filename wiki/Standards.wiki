@@ -6,11 +6,11 @@ The ps man page "standards" man page says:
 
        This ps conforms to:
 
-       1   Version 2 of the Single Unix Specification
-       2   The Open Group Technical Standard Base Specifications, Issue 6
-       3   IEEE Std 1003.1, 2004 Edition
-       4   X/Open System Interfaces Extension [UP XSI]
-       5   ISO/IEC 9945:2003
+       # Version 2 of the Single Unix Specification
+       #   The Open Group Technical Standard Base Specifications, Issue 6
+       #   IEEE Std 1003.1, 2004 Edition
+       #   X/Open System Interfaces Extension [UP XSI]
+       #   ISO/IEC 9945:2003
 
 
 At first glance, I thought conforming to five different standards is why it is a mess. Later I reviewed these standards.
