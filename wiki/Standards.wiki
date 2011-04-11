@@ -3,7 +3,7 @@
 = Introduction =
 
 The ps man page "standards" man page says:
-{{{
+
        This ps conforms to:
 
        1   Version 2 of the Single Unix Specification
@@ -11,15 +11,27 @@ The ps man page "standards" man page says:
        3   IEEE Std 1003.1, 2004 Edition
        4   X/Open System Interfaces Extension [UP XSI]
        5   ISO/IEC 9945:2003
-}}}
+
 
 At first glance, I thought conforming to five different standards is why it is a mess. Later I reviewed these standards.
 
 
 = Details =
 
-In fact, these five standards are the *same* thing. And they are the same thing with POSIX:2004. One of the official texts of this standards is located [
-http://pubs.opengroup.org/onlinepubs/009695399/ here].
+From http://www.unix.org/version3/iso_std.html, we see:
 
+    ISO/IEC 9945:2003 ... is technically identical to The Open Group, Base Specifications, Issue 6 and IEEE Std 1003.1, 2003 edition; they are one and the same documents, the front cover having all the designations.
 
-According to [https://secure.wikimedia.org/wikipedia/en/wiki/Single_UNIX_Specification#2004:_POSIX:2004 this], 
+Though from http://pubs.opengroup.org/onlinepubs/009695399/, we know The Open Group Base Specifications Issue 6 and IEEE Std 1003.1, 2004 Edition are the same thing. WTF? 2003 or 2004? These are so called standards. They are not even consistent here and there. Whatever, we think Standard 2, 3 and 5 in ps(1) are the same thing. They are the same thing with POSIX:2004. 
+
+According to [http://book.chinaunix.net/special/ebook/addisonWesley/APUE2/0201433079/ch02lev1sec2.html],
+
+    The Single UNIX Specification, a superset of the POSIX.1 standard, specifies additional interfaces that extend the functionality provided by the basic POSIX.1 specification. The complete set of system interfaces is called the X/Open System Interface (XSI). The `_XOPEN_UNIX` symbolic constant identifies interfaces that are part of the XSI extensions to the base POSIX.1 interfaces.
+
+    The XSI also defines which optional portions of POSIX.1 must be supported for an implementation to be deemed XSI conforming. These include file synchronization, memory-mapped files, memory protection, and thread interfaces, and are marked in Figure 2.5 as "SUS mandatory." Only XSI-conforming implementations can be called UNIX systems.
+
+Standard 1, [http://www.unix.org/version2/ Version 2 of the Single Unix Specification], is released in 1997, which is a superset of [http://standards.ieee.org/develop/wg/POSIX.html IEEE 1003.1] standards. Standard 5, X/Open System Interfaces Extension, is a supplementary specification to the Single UNIX Specification.
+
+= Conclusion =
+
+So a little roughly speaking, the five standards ps conforms to, which the author claims, is the same thing. Why bother using these obsfuscated names as a way of zhuangbility?
