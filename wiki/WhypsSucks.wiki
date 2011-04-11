@@ -7,3 +7,9 @@ This is the first reason and motivation that made me fork ps. It supports Unix o
 =Badly documented=
 
 The man page ps(1) documents the ps command. But it omits many of the intricacies under the hood. Just look at the 4th paragraph of Description Section of the man page, it gives you a mess from the start.
+
+=ps frustration=
+
+Here listed are people frustrated by ps:
+
+http://serverfault.com/questions/72119/ps-on-slackware-works-weird-why-does-it-show-the-process-multiple-times
