@@ -20,10 +20,10 @@ The BSD options can be safely removed support, and there are Unix and GNU equiva
 
 || BSD option || Equivalent || Function || Note ||
 || `ps a` || `ps -o pid,tname,stat,bsdtime,command -N -t -` || List all processes with a terminal. ||  ||
-|| `ps g` || `/bin/ps -o pid,tname,stat,bsdtime,command -u $EUID -N -t -` || List all processes with a terminal and owned by yourself || Won't work, why? ||
+|| `ps g` || `/bin/ps -o pid,tname,stat,bsdtime,command -u $EUID -N -t -` || List all processes with a terminal and owned by yourself || Won't work, why? Bash only.||
 || `ps T` || `ps -o pid,tname,stat,bsdtime,command` || Select all processes associated with this terminal. ||  ||
 ||  ||  ||  ||  ||
-|| `ps x` || `ps -u $EUID -o pid,tname,stat,bsdtime,command` || List all processes owned by you. ||  ||
+|| `ps x` || `ps -u $EUID -o pid,tname,stat,bsdtime,command` || List all processes owned by you. || Bash only. ||
 ||  ||  ||  ||  ||
 ||  ||  ||  ||  ||
 ||  ||  ||  ||  ||
