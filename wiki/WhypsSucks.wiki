@@ -2,7 +2,14 @@
 
 =Messy options=
 
-This is the first reason and motivation that made me fork ps. It supports Unix options, BSD options and GNU options. But the options are difficult to remember and are prone to errors. 
+This is the first reason and motivation that made me fork ps. It supports Unix options, BSD options and GNU options. But the options are difficult to remember and are prone to errors.
+
+According to ps(1):
+ 
+    The use of BSD-style options will add process state (stat=STAT) to the default display and show the command args (args=COMMAND) instead of the executable name. ... The use of BSD-style options will also change the process selection to include processes on other terminals (TTYs) that are owned by you.
+
+Adding the fact that BSD options and other options do not overlap, some functions are only avaiable in a BSD option or non-BSD option. When the user is trying the options, he may see different output due to BSD option effects. This will not give the user a consistent output, while make the user distracted.
+
 
 =Badly documented=
 
