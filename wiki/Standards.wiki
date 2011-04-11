@@ -1,0 +1,25 @@
+#Review of the "standards" section in ps(1).
+
+= Introduction =
+
+The ps man page "standards" man page says:
+{{{
+       This ps conforms to:
+
+       1   Version 2 of the Single Unix Specification
+       2   The Open Group Technical Standard Base Specifications, Issue 6
+       3   IEEE Std 1003.1, 2004 Edition
+       4   X/Open System Interfaces Extension [UP XSI]
+       5   ISO/IEC 9945:2003
+}}}
+
+At first glance, I thought conforming to five different standards is why it is a mess. Later I reviewed these standards.
+
+
+= Details =
+
+In fact, these five standards are the *same* thing. And they are the same thing with POSIX:2004. One of the official texts of this standards is located [
+http://pubs.opengroup.org/onlinepubs/009695399/ here].
+
+
+According to [https://secure.wikimedia.org/wikipedia/en/wiki/Single_UNIX_Specification#2004:_POSIX:2004 this], 
