@@ -13,7 +13,3 @@ The man page ps(1) documents the ps command. But it omits many of the intricacie
 Here listed are people frustrated by ps:
 
 http://serverfault.com/questions/72119/ps-on-slackware-works-weird-why-does-it-show-the-process-multiple-times
-
-http://serverfault.com/search?q=ps 
-
-Question about ps are mostly on command line options behavior. And most of the questions are unanswered.
