@@ -25,8 +25,8 @@ if you evoke `ps -t`, ps will tell you:
 
 followed by `ps t` output. ps thinks you are actually using `t`, when you mean `-t` but forgot the `ttylist` arguments. GNU ps will tell you what's wrong:
 
- `$ gps -t
-ERROR: List of terminals (pty, tty...) must follow -t.`
+ `$ gps -t`
+ `ERROR: List of terminals (pty, tty...) must follow -t.`
 
 This is much clearer.
 
