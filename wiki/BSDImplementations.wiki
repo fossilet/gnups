@@ -20,25 +20,21 @@ The BSD options can be safely removed support, and there are Unix and GNU equiva
 
 || BSD option || Equivalent || Function || Note ||
 || `ps a` || `ps -o pid,tname,stat,bsdtime,command -N -t -` || List all processes with a terminal. ||  ||
-|| `ps g` || `/bin/ps -o pid,tname,stat,bsdtime,command -u $EUID -N -t -` || List all processes with a terminal and owned by yourself || Won't work, why? Bash only.||
+|| `ps g` || `ps -o pid,tname,stat,bsdtime,command -N -t -` || List all processes with a terminal and owned by yourself || But this lift the "only-yourself" restriction. ||
 || `ps T` || `ps -o pid,tname,stat,bsdtime,command` || Select all processes associated with this terminal. ||  ||
-||  ||  ||  ||  ||
+|| `ps r` ||  ||  ||  ||
 || `ps x` || `ps -u $EUID -o pid,tname,stat,bsdtime,command` || List all processes owned by you. || Bash only. ||
-||  ||  ||  ||  ||
-||  ||  ||  ||  ||
-||  ||  ||  ||  ||
-||  ||  ||  ||  ||
-||  ||  ||  ||  ||
-||  ||  ||  ||  ||
-||  ||  ||  ||  ||
-||  ||  ||  ||  ||
-||  ||  ||  ||  ||
-||  ||  ||  ||  ||
-||  ||  ||  ||  ||
-||  ||  ||  ||  ||
-||  ||  ||  ||  ||
-||  ||  ||  ||  ||
-||  ||  ||  ||  ||
-||  ||  ||  ||  ||
-||  ||  ||  ||  ||
-||  ||  ||  ||  ||
+|| `ps <pid>` || `ps -o pid,tname,stat,bsdtime,command -p <pid>` or `ps -o pid,tname,stat,bsdtime,command --pid <pid>` ||  ||  ||
+|| `ps t [ttylist]` || `ps -o pid,tt,state,bsdtime,command -t [ttylist]` ||  || -t should not have an empty `ttylist` ||
+|| `ps U <userlist>` || `ps -o pid,tname,stat,bsdtime,command -u <userlist>` ||  ||  ||
+|| `ps j` || `ps -o ppid,pid,pgid,sid,tty,tpgid,stat,uid,bsdtime,command -N -t -` || BSD job control format. || But this lift the "only-yourself" restriction. ||
+|| `ps l` || `ps -o f,uid,pid,ppid,pri,ni,vsize,rss,wchan,stat,tname,bsdtime,command -N -t -` || BSD long format. || But this lift the "only-yourself" restriction. ||
+|| `ps O <format>` || `ps -o pid,<format>,state,tname,time,command` ||  ||  ||
+|| `ps o <format>` || `ps -o <format>` or `ps --format <format>` ||  ||  ||
+|| `ps s` || `ps -o uid,pid,pending,blocked,ignored,caught,stat,tname,bsdtime,command -N -t -` ||  || But this lift the "only-yourself" restriction. ||
+|| `ps u` || `ps -o user,pid,pcpu,pmem,vsize,rss,tname,stat,start_time,bsdtime,command -N -t -` ||  || But this lift the "only-yourself" restriction. ||
+|| `ps v`  || `ps -o pid,tname,stat,bsdtime,maj_flt,rss,pmem,command -N -t -` ||  || But this lift the "only-yourself" restriction. What is TRS and TRS in `ps v` output? ||
+|| `ps X` || `ps -o pid,stackp,esp,eip,tmout,alarm,stat,tname,bsdtime,command -N -t -
+` ||  || But this lift the "only-yourself" restriction. ||
+
+Rest are omitted. It is easy to test.
