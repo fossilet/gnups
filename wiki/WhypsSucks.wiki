@@ -17,6 +17,20 @@ The man page ps(1) documents the ps command. But it omits many of the intricacie
 
 Either simple selection or selection by list, only the last selection expression is applied. This is not documented. Though there are many filters, but in fact you can only use one at a time.
 
+=Weird output=
+
+if you evoke `ps -t`, ps will tell you:
+
+ `Warning: bad ps syntax, perhaps a bogus '-'? See http://procps.sf.net/faq.html`
+
+followed by `ps t` output. ps thinks you are actually using `t`, when you mean `-t` but forgot the `ttylist` arguments. GNU ps will tell you what's wrong:
+
+ `$ gps -t
+ERROR: List of terminals (pty, tty...) must follow -t.`
+
+This is much clearer.
+
+
 =ps frustration=
 
 Here listed are people frustrated by ps:
