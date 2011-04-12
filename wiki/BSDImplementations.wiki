@@ -34,7 +34,6 @@ The BSD options can be safely removed support, and there are Unix and GNU equiva
 || `ps s` || `ps -o uid,pid,pending,blocked,ignored,caught,stat,tname,bsdtime,command -N -t -` ||  || But this lift the "only-yourself" restriction. ||
 || `ps u` || `ps -o user,pid,pcpu,pmem,vsize,rss,tname,stat,start_time,bsdtime,command -N -t -` ||  || But this lift the "only-yourself" restriction. ||
 || `ps v`  || `ps -o pid,tname,stat,bsdtime,maj_flt,rss,pmem,command -N -t -` ||  || But this lift the "only-yourself" restriction. What is TRS and TRS in `ps v` output? ||
-|| `ps X` || `ps -o pid,stackp,esp,eip,tmout,alarm,stat,tname,bsdtime,command -N -t -
-` ||  || But this lift the "only-yourself" restriction. ||
+|| `ps X` || `ps -o pid,stackp,esp,eip,tmout,alarm,stat,tname,bsdtime,command -N -t - ` ||  || But this lift the "only-yourself" restriction. ||
 
 Rest are omitted. It is easy to test.
