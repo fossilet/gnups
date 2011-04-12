@@ -1,4 +1,4 @@
-#WTF is BSD options?
+#What is BSD options?
 
 = Introduction =
 
