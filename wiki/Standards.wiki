@@ -34,4 +34,4 @@ Standard 1, [http://www.unix.org/version2/ Version 2 of the Single Unix Specific
 
 = Conclusion =
 
-So a little roughly speaking, the five standards ps conforms to, which the author claims, is the same thing. Why bother using these obsfuscated names as a way of zhuangbility?
+XXX
