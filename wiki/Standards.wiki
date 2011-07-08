@@ -34,4 +34,9 @@ Standard 1, [http://www.unix.org/version2/ Version 2 of the Single Unix Specific
 
 = Conclusion =
 
-XXX
+<wiki:comment>
+So a little roughly speaking, the five standards ps conforms to, which the author claims, is the same thing. Why bother using these obsfuscated names as a way of zhuangbility?
+</wiki:comment>
+
+Using 'BSD Options' conflicts with POSIX. POSITX says 'All options should be preceded by the '-' delimiter character'. `ps` is not POSIX compliant at all. 
+http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap12.html#tag_12_02

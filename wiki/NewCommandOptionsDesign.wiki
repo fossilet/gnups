@@ -1,0 +1,16 @@
+#New Command Options Design
+
+=Principles=
+
+  * There *must* be no BSD options. All options must either start with `-`(Unix options) or `--`(GNU long options).
+  * It *must* be POSIX.1 2008 compliant. http://pubs.opengroup.org/onlinepubs/9699919799/utilities/ps.html 
+  * It *can* be incompatible with `ps`.
+  * There *should* be only one unix option for each feature.
+  * There *should* be more GNU options.
+
+=New Design=
+
+This is still a draft. Please comment below.
+
+-a Write information for all processes associated with terminals. Implementations may omit session leaders from this list.
+-A Write information for all processes.

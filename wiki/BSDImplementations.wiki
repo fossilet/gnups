@@ -14,6 +14,10 @@ I have been using a FreeBSD machine for years. But I never think of BSD options 
 
 WTF?
 
+After reading POSIX specification for `ps`, I understand that. BSD and System V implementations differ much. The author then use such a ugly way to incorporate both flavors.
+
+We are modern Linux users. Is it really necessary to have both different historical implementations? The answer is: NO. This is a piece of daily software, not a pedantic book. We do not need the other implementation crap. We want incompatibility.
+
 = BSD options equivalent =
 
 The BSD options can be safely removed support, and there are Unix and GNU equivalent options. Only single BSD options are listed. Combinations are not listed, since there is little meaning.
